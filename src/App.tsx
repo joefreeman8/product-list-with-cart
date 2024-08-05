@@ -1,9 +1,11 @@
 import './App.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import dessertData from '../data.json'
 import iconAddToCart from './assets/images/icon-add-to-cart.svg'
 import emptyCart from './assets/images/illustration-empty-cart.svg'
+import decrementItem from './assets/images/icon-decrement-quantity.svg'
+import incrementItem from './assets/images/icon-increment-quantity.svg'
 
 interface Images {
   thumbnail: string
@@ -17,35 +19,90 @@ interface Dessert {
   name: string
   category: string
   price: number
+  quantity: number
 }
 
-const typedDessertData: Dessert[] = dessertData
+const typedDessertData: Dessert[] = dessertData.map(dessert => ({
+  ...dessert,
+  quantity: 0
+}))
 
 function App() {
-
   const [data] = useState<Dessert[] | null>(typedDessertData)
-  const [cart, setCart] = useState<Dessert[] | null>(null)
+  const [cart, setCart] = useState<Dessert[]>([])
   const [itemCount, setItemCount] = useState<number>(0)
 
-  console.log(data)
+  useEffect(() => {
+    const newItemCount = cart.reduce((total, item) => total + item.quantity, 0)
+    setItemCount(newItemCount)
+  }, [cart])
 
+  function handleAddToCart(dessert: Dessert) {
+    setCart(prevCart => {
+      const existingItem = prevCart.find(item => item.name === dessert.name)
+      if (existingItem) {
+        return prevCart.map(item =>
+          item.name === dessert.name ? { ...item, quantity: item.quantity + 1 } : item
+        )
+      } else {
+        return [...prevCart, { ...dessert, quantity: 1 }]
+      }
+    })
+  }
 
+  function handleIncreaseQuantity(dessert: Dessert) {
+    setCart(prevCart =>
+      prevCart.map(item =>
+        item.name === dessert.name ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    )
+  }
+
+  function handleDecreaseQuantity(dessert: Dessert) {
+    setCart(prevCart =>
+      prevCart.map(item =>
+        item.name === dessert.name ? { ...item, quantity: Math.max(0, item.quantity - 1) } : item
+      ).filter(item => item.quantity > 0)
+    )
+  }
+
+  function isItemInCart(dessertName: string) {
+    return cart.some(item => item.name === dessertName)
+  }
 
   return (
     <div className='m-0 flex flex-row bg-offWhite'>
-      <section className='w-2/3 mt-20 ml-20'>
+      <section className='lg:w-2/3 mt-20 ml-20'>
         <h1 className='font-bold text-3xl text-rose-900 mb-8'>Desserts</h1>
-        <div className='grid grid-cols-3 gap-6'>
+        <div className='lg:grid lg:grid-cols-3 lg:gap-6'>
           {data && (
             data.map((dessert, index) => (
               <div key={index}>
-                <figure className='flex flex-col items-center mb-2'>
-                  <img className="rounded z-0" src={dessert.image.desktop} alt={dessert.name} />
-                  <button className='-mt-5 z-10 bg-white flex items-center max-w-40 h-11 btn border border-rose-400 rounded-full text-rose-900 font-semibold text-sm p-4'>
-                    <img src={iconAddToCart} alt='add to cart icon' className='mr-1' />
-                    Add to Cart
-                  </button>
-                </figure>
+                {isItemInCart(dessert.name) ? (
+                  <figure className='flex lg:flex-col lg:items-center lg:mb-2'>
+                    <img className="rounded z-0 border border-2 border-red rounded-lg" src={dessert.image.desktop} alt={dessert.name} />
+                    <div className='-mt-5 z-10 bg-red flex items-center w-40 h-11 btn border border-red rounded-full text-white font-semibold text-sm p-4 justify-between'>
+                      <button onClick={() => handleDecreaseQuantity(dessert)} className='p-1 border rounded-full'>
+                        <img src={decrementItem} alt='decrement button' className='w-2 h-2' />
+                      </button>
+                      {cart.find(item => item.name === dessert.name)?.quantity || 0}
+                      <button onClick={() => handleIncreaseQuantity(dessert)} className='p-1 border rounded-full'>
+                        <img src={incrementItem} alt='increment button' className='h-2' />
+                      </button>
+                    </div>
+                  </figure>
+                ) : (
+                  <figure className='flex lg:flex-col lg:items-center lg:mb-2'>
+                    <img className="rounded z-0" src={dessert.image.desktop} alt={dessert.name} />
+                    <button
+                      className='-mt-5 z-10 bg-white flex items-center max-w-40 h-11 btn border border-rose-400 rounded-full text-rose-900 font-semibold text-sm p-4'
+                      onClick={() => handleAddToCart(dessert)}
+                    >
+                      <img src={iconAddToCart} alt='add to cart icon' className='mr-1' />
+                      Add to Cart
+                    </button>
+                  </figure>
+                )}
                 <span className='text-sm text-rose-500'>{dessert.category}</span>
                 <h2 className='font-semibold text-rose-900'>{dessert.name}</h2>
                 <p className='font-semibold text-red'>${dessert.price.toFixed(2)}</p>
@@ -54,10 +111,10 @@ function App() {
           )}
         </div>
       </section>
-      <section className='ml-8 mt-20 mr-20 w-1/3 bg-white h-fit'>
+      <section className='ml-8 mt-20 mr-20 lg:w-1/3 bg-white h-fit'>
         {/* <div className='m-6'> */}
 
-        {!cart ? (
+        {cart.length === 0 ? (
           <div className='flex flex-col p-6'>
             <h2 className='text-red font-bold text-lg'>Your Cart ({itemCount})</h2>
             <div className='flex flex-col'>
@@ -68,7 +125,9 @@ function App() {
             </div>
           </div>
         ) : (
-          <h1>Checkout Cart </h1>
+          <div className='flex flex-col p-6'>
+            <h2 className='text-red font-bold text-lg'>Your Cart ({itemCount})</h2>
+          </div>
         )}
         {/* </div> */}
       </section>
