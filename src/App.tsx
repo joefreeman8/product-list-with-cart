@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import dessertData from '../data.json'
 import iconAddToCart from './assets/images/icon-add-to-cart.svg'
+import emptyCart from './assets/images/illustration-empty-cart.svg'
 
 interface Images {
   thumbnail: string
@@ -31,15 +32,15 @@ function App() {
 
 
   return (
-    <div className='m-0 p-14 flex flex-row bg-offWhite'>
-      <section>
+    <div className='m-0 flex flex-row bg-offWhite'>
+      <section className='w-2/3 mt-20 ml-20'>
         <h1 className='font-bold text-3xl text-rose-900 mb-8'>Desserts</h1>
         <div className='grid grid-cols-3 gap-6'>
           {data && (
             data.map((dessert, index) => (
               <div key={index}>
-                <figure className='flex flex-col items-center mb-4'>
-                  <img className="w-60 rounded z-0" src={dessert.image.desktop} alt={dessert.name} />
+                <figure className='flex flex-col items-center mb-2'>
+                  <img className="rounded z-0" src={dessert.image.desktop} alt={dessert.name} />
                   <button className='-mt-5 z-10 bg-white flex items-center max-w-40 h-11 btn border border-rose-400 rounded-full text-rose-900 font-semibold text-sm p-4'>
                     <img src={iconAddToCart} alt='add to cart icon' className='mr-1' />
                     Add to Cart
@@ -53,12 +54,23 @@ function App() {
           )}
         </div>
       </section>
-      <section className='m-6'>
+      <section className='ml-8 mt-20 mr-20 w-1/3 bg-white h-fit'>
+        {/* <div className='m-6'> */}
+
         {!cart ? (
-          <h2 className='text-red font-bold text-lg'>Your Cart ({itemCount})</h2>
+          <div className='flex flex-col p-6'>
+            <h2 className='text-red font-bold text-lg'>Your Cart ({itemCount})</h2>
+            <div className='flex flex-col'>
+              <figure className='flex justify-center my-4'>
+                <img src={emptyCart} alt="empty cart image" className='w-32 h-32' />
+              </figure>
+              <p className='text-sm font-semibold text-rose-500 text-center mb-4'>Your added items will appear here</p>
+            </div>
+          </div>
         ) : (
           <h1>Checkout Cart </h1>
         )}
+        {/* </div> */}
       </section>
     </div >
   )
