@@ -7,6 +7,7 @@ import emptyCart from './assets/images/illustration-empty-cart.svg'
 import decrementItem from './assets/images/icon-decrement-quantity.svg'
 import incrementItem from './assets/images/icon-increment-quantity.svg'
 import carbonNeutralIcon from './assets/images/icon-carbon-neutral.svg'
+import removeItemIcon from './assets/images/icon-remove-item.svg'
 
 interface Images {
   thumbnail: string
@@ -75,6 +76,12 @@ function App() {
     return cart.some(item => item.name === dessertName)
   }
 
+  function removeItem(item: Dessert) {
+    setCart(prevCart => prevCart.filter(dessert => {
+      return dessert.name !== item.name
+    }))
+
+  }
 
   return (
     <div className='m-0 flex flex-row bg-offWhite'>
@@ -134,15 +141,22 @@ function App() {
             <h2 className='text-red font-bold text-lg'>Your Cart ({itemCount})</h2>
             {cart.map((item, idx) => (
               <>
-                <div key={idx} className='flex flex-col p-2'>
-                  <h3 className='text-sm font-semibold text-rose-900'>{item.name}</h3>
-                  <div className='flex flex-row justify-between items-center w-2/5'>
-                    <p className='text-sm text-red font-semibold'>{item.quantity}x</p>
-                    <p className='text-sm text-rose-400'>@${item.price.toFixed(2)}</p>
-                    <p className='text-rose-500'> ${(item.quantity * item.price).toFixed(2)}</p>
+                <div key={idx} className='flex flex-row '>
+                  <div className='flex flex-col p-2 w-full'>
+                    <h3 className='text-sm font-semibold text-rose-900'>{item.name}</h3>
+                    <div className='flex flex-row justify-between items-center w-3/6'>
+                      <p className='text-sm text-red font-semibold'>{item.quantity}x</p>
+                      <p className='text-sm text-rose-400'>@${item.price.toFixed(2)}</p>
+                      <p className='text-rose-500'> ${(item.quantity * item.price).toFixed(2)}</p>
+                    </div>
                   </div>
+                  <div className='flex items-center'>
+                    <button className='flex justify-center items-center btn border border-rose-400 rounded-full'>
+                      <img onClick={() => removeItem(item)} src={removeItemIcon} alt='remove item button' className='p-1' />
+                    </button>
+                  </div>
+                  <hr />
                 </div>
-                <hr />
               </>
             ))}
             <div className='flex flex-row justify-between my-5'>
