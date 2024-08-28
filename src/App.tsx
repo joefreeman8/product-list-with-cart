@@ -100,8 +100,8 @@ function App() {
 
   return (
     <>
-      <div className='m-0 flex flex-row bg-offWhite'>
-        <section className='lg:w-2/3 mt-20 ml-20'>
+      <div className='m-0 flex lg:flex-col xl:flex-row bg-offWhite lg:items-center'>
+        <section className='lg:w-10/12 xl:w-2/3 xl:mt-20 xl:ml-20 lg:mt-20 lg:mr-10 lg:ml-10'>
           <h1 className='font-bold text-3xl text-rose-900 mb-8'>Desserts</h1>
           <div className='lg:grid lg:grid-cols-3 lg:gap-6'>
             {data && (
@@ -122,7 +122,7 @@ function App() {
                     </figure>
                   ) : (
                     <figure className='flex lg:flex-col lg:items-center lg:mb-2'>
-                      <img className="rounded z-0" src={dessert.image.desktop} alt={dessert.name} />
+                      <img className="rounded-lg z-0" src={dessert.image.desktop} alt={dessert.name} />
                       <button
                         className='-mt-5 z-10 bg-white flex items-center max-w-40 h-11 btn border border-rose-400 rounded-full text-rose-900 font-semibold text-sm p-4'
                         onClick={() => handleAddToCart(dessert)}
@@ -141,7 +141,7 @@ function App() {
           </div>
         </section>
 
-        <section className='ml-8 mt-20 mr-20 lg:w-1/3 bg-white h-fit'>
+        <section className='xl:ml-8 xl:mt-20 xl:mr-20 xl:w-1/3 bg-white h-fit lg:ml-10 lg:mr-10 lg:mt-8 lg:mb-10 lg:w-10/12'>
           {cart.length === 0 ? (
             <div className='flex flex-col p-6'>
               <h2 className='text-red font-bold text-lg'>Your Cart ({itemCount})</h2>
@@ -221,7 +221,7 @@ function App() {
               ))}
               <div className='flex flex-row justify-between items-center'>
                 <p className='text-sm text-rose-900'>Order Total</p>
-                <h3 className='font-bold text-xl text-rose-900'>${totalPrice.toFixed(2)}</h3>
+                <p className='font-bold text-xl text-rose-900'>${totalPrice.toFixed(2)}</p>
               </div>
             </div>
             <button onClick={handleClearCart} className='btn rounded-full bg-red text-rose-50 h-10 w-full'>
