@@ -185,16 +185,44 @@ function App() {
         </section>
       </div >
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-50">
-          <div className="relative p-8 bg-white w-full max-w-md rounded-lg shadow-lg">
-            <div>
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-50 w-full">
+          <div className="relative p-8 bg-white rounded-lg shadow-lg w-5/12">
+            <div className=''>
               <img src={orderConfirmed} alt="Order Confirmed Icon" className='mb-6' />
               <h2 className='font-bold text-3xl text-rose-900 mb-3'>Order Confirmed</h2>
               <p className='text-rose-500'>We hope you enjoy your food!</p>
             </div>
-            <div className=''>
-              test
+            <div className='my-8 bg-rose-50 p-6 rounded-xl'>
+              {cart.map((item) => (
+                <>
+                  <div key={item.id} className='flex flex-row '>
+                    <div className='flex flex-row p-2 w-full'>
+                      <figure className='mr-4'>
+                        <img src={item.image.thumbnail} alt={item.name} className='rounded-lg h-12 w-12' />
+                      </figure>
+                      <div className='flex flex-col justify-around'>
+                        <h3 className='text-sm font-semibold text-rose-900'>{item.name}</h3>
+                        <div className='flex flex-row justify-between w-20'>
+                          <p className='text-sm text-red font-semibold'>{item.quantity}x</p>
+                          <p className='text-sm text-rose-400'>@${item.price.toFixed(2)}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='flex items-center'>
+                      <p className='text-rose-900 font-semibold'> ${(item.quantity * item.price).toFixed(2)}</p>
+                    </div>
+                  </div>
+                  <hr className='my-4' />
+                </>
+              ))}
+              <div className='flex flex-row justify-between items-center'>
+                <p className='text-sm text-rose-900'>Order Total</p>
+                <h3 className='font-bold text-xl text-rose-900'>${totalPrice.toFixed(2)}</h3>
+              </div>
             </div>
+            <button className='btn rounded-full bg-red text-rose-50 h-10 w-full'>
+              Start New Order
+            </button>
           </div>
         </div>
       )}
