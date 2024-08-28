@@ -91,7 +91,11 @@ function App() {
     setCart(prevCart => prevCart.filter(dessert => {
       return dessert.name !== item.name
     }))
+  }
 
+  function handleClearCart() {
+    setCart([])
+    closeModal()
   }
 
   return (
@@ -220,7 +224,7 @@ function App() {
                 <h3 className='font-bold text-xl text-rose-900'>${totalPrice.toFixed(2)}</h3>
               </div>
             </div>
-            <button className='btn rounded-full bg-red text-rose-50 h-10 w-full'>
+            <button onClick={handleClearCart} className='btn rounded-full bg-red text-rose-50 h-10 w-full'>
               Start New Order
             </button>
           </div>
