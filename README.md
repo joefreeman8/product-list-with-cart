@@ -1,30 +1,71 @@
-# React + TypeScript + Vite
+# Frontend Mentor - Product list with cart solution
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a solution to the [Product list with cart challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-list-with-cart-5MmqLVAp_d). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-Currently, two official plugins are available:
+## Table of contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+- [Author](#author)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Overview
 
-- Configure the top-level `parserOptions` property like this:
+### The challenge
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Users should be able to:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Add items to the cart and remove them
+- Increase/decrease the number of items in the cart
+- See an order confirmation modal when they click "Confirm Order"
+- Reset their selections when they click "Start New Order"
+- View the optimal layout for the interface depending on their device's screen size
+- See hover and focus states for all interactive elements on the page
+
+### Screenshot
+
+![Screenshot of app](./src/assets/screenshot.png)
+
+### Links
+
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+
+## My process
+
+### Built with
+
+- Semantic HTML5 markup
+- Flexbox
+- CSS Grid
+- TypeScript
+- [React](https://reactjs.org/) - JS library
+- [Vite.js](https://vitejs.dev/) - JS build tool
+- [Tailwindcss](https://tailwindcss.com/docs/installation) - For styles
+
+
+### What I learned
+
+This was my first full project using TypeScript. It was great to learn how to keep my code strictly typed, the thought of TypeScript speeding up the programmers ability to code was not quite there as I got to grips with interfaces and assigning datatypes all over the place, but it's a start on the right path.
+
+Another part of learning for me is that next time I will make sure I build mobile first, and larger devices second / third. I discovered that with the way I built the app, once it was time to bring in breakpoints for mobile phones, the breakpoints were not small enough, so it would have been easier and cleaner to have started with my generic sizing for mobiles and then using md: lg: and xl: as required. 
+
+
+### Continued development
+
+I want to build my next project again with the same tools of TypeScipt and Tailwind, to solidify my understading with both. 
+
+This project can also do with some refactoring into different components, as it's currently just one giant app.tsx - which nobody loves! 
+
+
+## Author
+
+- Website - [Add your name here](https://www.your-site.com)
+- Frontend Mentor - [@joefreeman8](https://www.frontendmentor.io/profile/joefreeman8)
+
