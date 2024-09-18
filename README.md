@@ -30,12 +30,12 @@ Users should be able to:
 
 ### Screenshot
 
-![Screenshot of app](./src/assets/screenshot.png)
+![Screenshot of app](./public/assets/screenshot.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [FE-Mentor solutions](https://www.frontendmentor.io/solutions/product-list-with-cart-made-with-typescript-and-tailwindcss-b3VonvNSEt)
+- Live Site URL: [fe-mentor-product-list-with-cart](https://fe-mentor-product-list-with-cart.netlify.app/)
 
 ## My process
 
@@ -66,6 +66,6 @@ This project can also do with some refactoring into different components, as it'
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
+- Website - [Joe Freeman](https://joefreeman.me)
 - Frontend Mentor - [@joefreeman8](https://www.frontendmentor.io/profile/joefreeman8)
 
