@@ -100,16 +100,16 @@ function App() {
 
   return (
     <>
-      <div className='m-0 flex lg:flex-col xl:flex-row bg-offWhite lg:items-center xl:items-start'>
-        <section className='lg:w-10/12 xl:w-2/3 xl:mt-20 xl:ml-20 lg:mt-20 lg:mr-10 lg:ml-10'>
+      <div className='m-0 flex lg:flex-col xl:flex-row bg-offWhite lg:items-center xl:items-start flex-col'>
+        <section className='lg:w-10/12 xl:w-2/3 xl:my-20 xl:ml-20 lg:mt-20 lg:mr-10 lg:ml-10 m-8'>
           <h1 className='font-bold text-3xl text-rose-900 mb-8'>Desserts</h1>
           <div className='lg:grid lg:grid-cols-3 lg:gap-6'>
             {data && (
               data.map((dessert) => (
-                <div key={dessert.id}>
+                <div key={dessert.id} className='mb-6 sm:mb-0'>
                   {isItemInCart(dessert.name) ? (
-                    <figure className='flex lg:flex-col lg:items-center lg:mb-2'>
-                      <img className="rounded z-0 border border-2 border-red rounded-lg" src={dessert.image.desktop} alt={dessert.name} />
+                    <figure className='flex flex-col items-center mb-2'>
+                      <img className="rounded z-0 border border-2 border-red rounded-lg h-64 w-full xl:h-60" src={dessert.image.desktop} alt={dessert.name} />
                       <div className='-mt-5 z-10 bg-red flex items-center w-40 h-11 btn border border-red rounded-full text-white font-semibold text-sm p-4 justify-between'>
                         <button onClick={() => handleDecreaseQuantity(dessert)} className='p-1 border rounded-full'>
                           <img src={decrementItem} alt='decrement button' className='w-2 h-2' />
@@ -121,8 +121,8 @@ function App() {
                       </div>
                     </figure>
                   ) : (
-                    <figure className='flex lg:flex-col lg:items-center lg:mb-2'>
-                      <img className="rounded-lg z-0" src={dessert.image.desktop} alt={dessert.name} />
+                    <figure className='flex flex-col justify-center items-center lg:mb-2'>
+                      <img className="rounded-lg z-0 h-64 w-full xl:h-60" src={dessert.image.desktop} alt={dessert.name} />
                       <button
                         className='-mt-5 z-10 bg-white flex items-center max-w-40 h-11 btn border border-rose-400 rounded-full text-rose-900 font-semibold text-sm p-4'
                         onClick={() => handleAddToCart(dessert)}
@@ -141,7 +141,7 @@ function App() {
           </div>
         </section>
 
-        <section className='xl:ml-8 xl:mt-20 xl:mr-20 xl:w-1/3 bg-white h-fit lg:ml-10 lg:mr-10 lg:mt-10 lg:mb-10 lg:w-10/12 rounded-lg'>
+        <section className='xl:ml-8 xl:mt-20 xl:mr-20 xl:w-1/3 bg-white h-fit lg:ml-10 lg:mr-10 lg:mt-10 lg:mb-10 lg:w-10/12 rounded-lg mx-8 mb-8 -mt-4'>
           {cart.length === 0 ? (
             <div className='flex flex-col p-6'>
               <h2 className='text-red font-bold text-lg'>Your Cart ({itemCount})</h2>
@@ -160,7 +160,7 @@ function App() {
                   <div key={item.id} className='flex flex-row '>
                     <div className='flex flex-col px-2 py-4 w-full'>
                       <h3 className='text-sm font-semibold text-rose-900'>{item.name}</h3>
-                      <div className='flex flex-row justify-between items-center xl:w-3/6 lg:w-1/6'>
+                      <div className='flex flex-row justify-between items-center xl:w-3/6 lg:w-1/6 w-3/6'>
                         <p className='text-sm text-red font-semibold'>{item.quantity}x</p>
                         <p className='text-sm text-rose-400'>@${item.price.toFixed(2)}</p>
                         <p className='text-rose-500'> ${(item.quantity * item.price).toFixed(2)}</p>
@@ -183,14 +183,14 @@ function App() {
                 <img src={carbonNeutralIcon} alt="carbon neutral notice" />
                 <p className='ml-2 text-sm'>This is a <span className='font-semibold'>carbon-neutral</span> delivery</p>
               </div>
-              <button onClick={openModal} className='mt-5 btn rounded-full bg-red text-rose-50 lg:h-14 xl:h-10 text-sm'>Confirm Order</button>
+              <button onClick={openModal} className='mt-5 btn rounded-full bg-red text-rose-50 h-14 xl:h-10 text-sm'>Confirm Order</button>
             </div>
           )}
         </section>
       </div >
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-50 w-full">
-          <div className="relative p-8 bg-white rounded-lg shadow-lg w-5/12">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-end md:justify-center bg-black bg-opacity-50 w-full">
+          <div className="relative p-8 bg-white rounded-lg shadow-lg xl:w-5/12 lg:w-11/12 w-full">
             <div className=''>
               <img src={orderConfirmed} alt="Order Confirmed Icon" className='mb-6' />
               <h2 className='font-bold text-3xl text-rose-900 mb-3'>Order Confirmed</h2>
