@@ -2,13 +2,13 @@ import './App.css'
 import { useEffect, useState } from 'react'
 
 import dessertData from '../data.json'
-import iconAddToCart from './assets/images/icon-add-to-cart.svg'
-import emptyCart from './assets/images/illustration-empty-cart.svg'
-import decrementItem from './assets/images/icon-decrement-quantity.svg'
-import incrementItem from './assets/images/icon-increment-quantity.svg'
-import carbonNeutralIcon from './assets/images/icon-carbon-neutral.svg'
-import removeItemIcon from './assets/images/icon-remove-item.svg'
-import orderConfirmed from './assets/images/icon-order-confirmed.svg'
+import iconAddToCart from '/assets/images/icon-add-to-cart.svg'
+import emptyCart from '/assets/images/illustration-empty-cart.svg'
+import decrementItem from '/assets/images/icon-decrement-quantity.svg'
+import incrementItem from '/assets/images/icon-increment-quantity.svg'
+import carbonNeutralIcon from '/assets/images/icon-carbon-neutral.svg'
+import removeItemIcon from '/assets/images/icon-remove-item.svg'
+import orderConfirmed from '/assets/images/icon-order-confirmed.svg'
 
 interface Images {
   thumbnail: string
